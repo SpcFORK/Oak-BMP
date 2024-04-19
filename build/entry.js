@@ -440,3 +440,12 @@ function __oak_js_try(fn) {
 `)):((out)=>((out=reduce(slice(xs,1),string(__oak_acc(xs,0)),function _(acc=null,x=null){return (__as_oak_string(__as_oak_string(acc+__Oak_String(` `))+string(x)))})),print(__as_oak_string(out+__Oak_String(`
 `)))))())(len(xs))},({_asPredicate,_baseIterator,_hToN,_nToH,append,clamp,clone,compact,contains__oak_qm,debounce,__oak_js_default,each,entries,every,filter,find,first,flatten,fromHex,identity,indexOf,join,last,loop,map,merge,once,partition,println,range,reduce,reverse,slice,some,stdin,take,takeLast,toHex,uniq,values,zip})))()}),(__Oak_Import_Aliases=({})),__oak_module_import(__Oak_String(`entry.oak`)))
 
+/* 
+  Oak-BMP
+  Ink module Refactored by @SpcFORK
+
+  https://github.com/SpcFORK/Oak-BMP
+
+  Copyright (c) 2020-2024 Linus Lee
+  Copyright (c) 2024 SpcFORK
+*/
