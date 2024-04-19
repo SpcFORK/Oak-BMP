@@ -70,6 +70,8 @@ bFile := path.resolve('entry', buildDir)
 
 fO_ := File + '.oak'
 bJS := bFile + '.js'
+archivebJS := bFile + '.oak'
+binFile := bFile |> string()
 head := File + '.header.js'
 foot := File + '.footer.js'
 
@@ -111,6 +113,30 @@ std.print(
   ], '').stdout << '\n'
 )
 
+std.print(
+  '\n[ OAKSri ]\n' << exec('oak', [
+    'build'
+
+    '--entry'
+    fO_
+
+    '--output'
+    archivebJS
+  ], '').stdout << '\n'
+)
+
+std.print(
+  '\n[ OAKSri ]\n' << exec('oak', [
+    path.resolve('nat/.pack.oak')
+
+    '--entry'
+    fO_
+
+    '--output'
+    binFile
+  ], '').stdout << '\n'
+)
+
 gotFile := with makeOrGetFile(bJS) ''
 gotHeader := with makeOrGetFile(head) ''
 gotFooter := with makeOrGetFile(foot) ''
@@ -138,7 +164,11 @@ fn resolveHTMLBuilding(build) {
 
 // ---
 
-with server.route('') fn(params) {
+with server.route('/*Path') fn(params) {
+  http.handleStatic(params.Path)
+}
+
+with server.route('/') fn(params) {
   fn(req, end) if req.method {
     'GET' -> end({
       status: 200

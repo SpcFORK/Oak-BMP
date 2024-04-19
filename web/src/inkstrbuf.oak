@@ -1,0 +1,14 @@
+std := import('std')
+
+// encode string buffer into a number list
+fn encode(str) {
+  fn sub(i, acc) if i {
+    len(str) -> acc
+    _ -> sub(i + 1, acc.(i) <- codepoint(str.(i)))
+  }
+
+  sub(0, [])
+}
+
+// decode number list into an ascii string
+fn decode(date) with std.reduce(data, '') fn(acc, cp) acc.len.(acc) <- char(cp)

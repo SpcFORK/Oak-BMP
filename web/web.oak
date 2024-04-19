@@ -1,0 +1,44 @@
+std := import('std')
+str := import('str')
+fmt := import('fmt')
+
+fn windowBind(fns...) {
+  with std.each(fns) fn (it) {
+    window.(it.name) <- it
+    globalThis.(it.name) <- it
+  }
+}
+
+ALL := windowBind(
+
+  // Stringify JS interop
+  fn s(pl) string(pl).toString()
+
+  fn kb(func, pls) {
+    strings := with std.map(pls) fn (it, i?) it |> s()
+
+    func(strings...)
+  }
+
+  // ---
+
+  fn do(code) eval(code |> s())
+  fn jsImport(path) do('import("{{ 0 }}")' |> fmt.format(path))
+  fn assign(name, code) w.(name |> string()) <- do(code)
+
+  // ---
+
+  // If an oakstr, force stringification for JS envs.
+  fn abstr?(thing, op) if type(thing) {
+    :string -> op(thing)
+  }
+
+  // ---
+
+  fn clense(args, pos) with abstr?(args.(pos)) fn(it) it <- it |> s()
+
+  // ---
+
+  
+
+)

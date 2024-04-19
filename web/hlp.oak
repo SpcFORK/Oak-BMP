@@ -1,0 +1,21 @@
+std := import('std')
+
+
+fn isJSMode?() globalThis != ?
+
+
+fn s(pl) if isJSMode?() {
+  res := string(pl)
+  true -> res.toString()
+  _ -> res
+}
+
+
+// Get the users platform
+fn platform? if isJSMode?() -> if {
+  globalThis.window != ? -> :web
+  (with try() fn() module).error = ? -> :node
+}
+
+
+// - Spectcow

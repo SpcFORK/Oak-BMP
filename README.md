@@ -2,6 +2,8 @@
 
 **Oak** is an expressive, dynamically typed programming language.
 
+https://replit.com/new?template=35830252-66d5-47f2-a9b6-a67c34384405
+
 Here's an example Oak program.
 
 ```js
